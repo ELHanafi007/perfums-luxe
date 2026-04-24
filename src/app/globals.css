@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 26, 26, 26;
+  --background-rgb: 252, 250, 248;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: #d4af37;
+  color: white;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .bg-gold-gradient {
+    background: linear-gradient(135deg, #d4af37 0%, #f7e08b 50%, #d4af37 100%);
+  }
+  .text-gold {
+    color: #d4af37;
+  }
+  .bg-luxury-black {
+    background-color: #0a0a0a;
+  }
+}
+
+/* Custom scrollbar for a luxury feel */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4af37;
+}
