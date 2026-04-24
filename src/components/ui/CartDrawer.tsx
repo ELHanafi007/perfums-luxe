@@ -124,9 +124,11 @@ export default function CartDrawer() {
                   <span className="text-2xl font-serif">${totalPrice}.00</span>
                 </div>
                 <div className="space-y-4">
-                  <Button size="full" className="py-6">
-                    Proceed to Checkout
-                  </Button>
+                  <Link href="/checkout" onClick={() => setIsCartOpen(false)}>
+                    <Button size="full" className="py-6">
+                      Proceed to Checkout
+                    </Button>
+                  </Link>
                   <p className="text-[9px] text-center uppercase tracking-[0.2em] text-gray-400">
                     Complimentary shipping on all orders
                   </p>

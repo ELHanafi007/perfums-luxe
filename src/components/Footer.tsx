@@ -42,7 +42,7 @@ export default function Footer() {
             <h4 className="text-[11px] uppercase tracking-[0.3em] font-bold mb-8">Customer Care</h4>
             <ul className="space-y-4 text-[13px] text-luxury-gray uppercase tracking-widest font-medium">
               <li><Link href="#" className="hover:text-gold transition-colors">Shipping & Returns</Link></li>
-              <li><Link href="#" className="hover:text-gold transition-colors">Fragrance Finder</Link></li>
+              <li><Link href="/#fragrance-finder" className="hover:text-gold transition-colors">Fragrance Finder</Link></li>
               <li><Link href="#" className="hover:text-gold transition-colors">Privacy Policy</Link></li>
               <li><Link href="#" className="hover:text-gold transition-colors">Terms of Service</Link></li>
             </ul>

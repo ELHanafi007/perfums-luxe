@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/context/CartContext";
+import SearchOverlay from "./ui/SearchOverlay";
 
 const navLinks = [
   { name: "Shop", href: "/" },
@@ -16,6 +17,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { totalItems, setIsCartOpen } = useCart();
 
@@ -67,7 +69,11 @@ export default function Navbar() {
 
           {/* Icons */}
           <div className="flex items-center space-x-5 md:space-x-8">
-            <button aria-label="Search" className="hover:text-gold transition-colors">
+            <button 
+              onClick={() => setIsSearchOpen(true)}
+              aria-label="Search" 
+              className="hover:text-gold transition-colors"
+            >
               <Search size={20} strokeWidth={1.5} />
             </button>
             <button 
@@ -143,6 +149,11 @@ export default function Navbar() {
           </>
         )}
       </AnimatePresence>
+
+      <SearchOverlay 
+        isOpen={isSearchOpen} 
+        onClose={() => setIsSearchOpen(false)} 
+      />
     </nav>
   );
 }

@@ -4,6 +4,7 @@ import Collections from "@/components/Collections";
 import Newsletter from "@/components/Newsletter";
 import Philosophy from "@/components/Philosophy";
 import Experience from "@/components/Experience";
+import FragranceFinder from "@/components/FragranceFinder";
 import { Marquee } from "@/components/ui/Marquee";
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       <Collections />
       <Marquee />
       <Experience />
+      <FragranceFinder />
       <ProductGrid />
       <Philosophy />
       <Newsletter />
