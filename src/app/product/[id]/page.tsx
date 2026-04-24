@@ -1,8 +1,13 @@
+"use client";
+
 import { products } from "@/data/products";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, MessageCircle } from "lucide-react";
+import { ArrowLeft, MessageCircle, Heart } from "lucide-react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/Button";
+import { Section } from "@/components/ui/Section";
 
 interface ProductPageProps {
   params: {
@@ -22,79 +27,104 @@ export default function ProductPage({ params }: ProductPageProps) {
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
-      <Link href="/" className="inline-flex items-center text-sm uppercase tracking-widest text-gray-400 hover:text-luxury-black transition-colors mb-12">
-        <ArrowLeft size={16} className="mr-2" />
+    <Section size="xl" className="pt-40">
+      <Link href="/" className="inline-flex items-center text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400 hover:text-gold transition-colors mb-16 group">
+        <ArrowLeft size={14} className="mr-3 group-hover:-translate-x-1 transition-transform" />
         Back to Collection
       </Link>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
         {/* Product Image */}
-        <div className="relative aspect-[4/5] overflow-hidden bg-white border-2 border-transparent hover:border-gold transition-all duration-500">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="relative aspect-[4/5] overflow-hidden bg-luxury-cream shadow-2xl"
+        >
           <Image
             src={product.image}
             alt={product.name}
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-1000 hover:scale-110"
             priority
           />
-        </div>
+          <div className="absolute inset-0 border-[1px] border-black/5 m-4 pointer-events-none" />
+        </motion.div>
 
         {/* Product Info */}
-        <div className="space-y-12">
-          <div>
-            <span className="text-xs uppercase tracking-[0.3em] text-gold font-bold mb-4 block">
+        <motion.div 
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="lg:pl-10"
+        >
+          <div className="mb-12">
+            <span className="text-gold text-[11px] uppercase tracking-[0.5em] font-bold mb-6 block">
               {product.brand}
             </span>
-            <h1 className="text-4xl md:text-5xl font-serif text-luxury-black mb-6">
+            <h1 className="text-5xl md:text-6xl font-serif text-luxury-black mb-8 leading-tight">
               {product.name}
             </h1>
-            <p className="text-2xl font-light text-luxury-black">
+            <p className="text-3xl font-light text-luxury-black">
               ${product.price}.00
             </p>
           </div>
 
-          <div className="space-y-6">
-            <h3 className="text-xs uppercase tracking-widest font-bold text-luxury-black">Description</h3>
-            <p className="text-luxury-gray leading-relaxed font-light text-lg">
-              {product.description}
-            </p>
-          </div>
+          <div className="space-y-10 mb-16">
+            <div className="space-y-4">
+              <h3 className="text-[11px] uppercase tracking-[0.3em] font-bold text-luxury-black">Description</h3>
+              <p className="text-luxury-gray leading-relaxed font-light text-lg italic">
+                {product.description}
+              </p>
+            </div>
 
-          <div className="space-y-6">
-            <h3 className="text-xs uppercase tracking-widest font-bold text-luxury-black">Olfactory Notes</h3>
-            <div className="flex flex-wrap gap-3">
-              {product.notes.map((note) => (
-                <span key={note} className="px-4 py-2 bg-white border border-gray-100 text-sm tracking-wide">
-                  {note}
-                </span>
-              ))}
+            <div className="space-y-6">
+              <h3 className="text-[11px] uppercase tracking-[0.3em] font-bold text-luxury-black">Olfactory Notes</h3>
+              <div className="flex flex-wrap gap-4">
+                {product.notes.map((note) => (
+                  <span key={note} className="px-5 py-2 bg-luxury-cream text-[11px] uppercase tracking-widest font-bold text-luxury-black/70 border border-gray-100">
+                    {note}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
 
-          <div className="pt-8 flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-6 mb-16">
             <a 
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-grow flex items-center justify-center gap-3 luxury-button uppercase tracking-widest text-xs"
+              className="flex-grow"
             >
-              <MessageCircle size={18} />
-              Order via WhatsApp
+              <Button size="full" className="flex items-center justify-center gap-3">
+                <MessageCircle size={18} strokeWidth={1.5} />
+                Order via WhatsApp
+              </Button>
             </a>
-            <button className="px-8 py-3 border border-luxury-black text-luxury-black hover:bg-luxury-black hover:text-white transition-colors duration-300 uppercase tracking-widest text-xs">
-              Add to Wishlist
+            <button className="w-full sm:w-16 h-16 border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all duration-300">
+              <Heart size={20} strokeWidth={1.5} />
             </button>
           </div>
 
-          <div className="border-t border-gray-100 pt-8">
-            <p className="text-[10px] uppercase tracking-widest text-gray-400 leading-loose">
-              Complimentary shipping on orders over $200. <br />
-              Signature LUXE ESSENCE packaging included.
-            </p>
+          <div className="border-t border-gray-100 pt-10">
+            <ul className="space-y-4 text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold">
+              <li className="flex items-center gap-3">
+                <div className="w-1.5 h-1.5 bg-gold rounded-full" />
+                Complimentary shipping on orders over $200
+              </li>
+              <li className="flex items-center gap-3">
+                <div className="w-1.5 h-1.5 bg-gold rounded-full" />
+                Signature LK ROYAL packaging included
+              </li>
+              <li className="flex items-center gap-3">
+                <div className="w-1.5 h-1.5 bg-gold rounded-full" />
+                Sustainably sourced rare botanicals
+              </li>
+            </ul>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </Section>
   );
 }
