@@ -5,12 +5,15 @@ import Link from "next/link";
 import { Product } from "@/types/product";
 import { motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 interface ProductCardProps {
   product: Product;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const { addToCart } = useCart();
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 30 }}
@@ -49,6 +52,11 @@ export default function ProductCard({ product }: ProductCardProps) {
           <motion.button 
             whileHover={{ scale: 1.1, backgroundColor: "#D4AF37" }}
             whileTap={{ scale: 0.95 }}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              addToCart(product);
+            }}
             className="w-14 h-14 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center text-black pointer-events-auto shadow-2xl"
             aria-label="Quick Add"
           >

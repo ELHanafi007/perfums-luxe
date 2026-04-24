@@ -4,7 +4,7 @@ export const products: Product[] = [
   {
     id: "1",
     name: "Golden Oud",
-    brand: "LK royal",
+    brand: "LK ROYAL",
     price: 120,
     description: "A rich, mysterious blend of rare oud and warm spices, evoking an evening in a desert palace.",
     notes: ["Oud", "Saffron", "Vanilla", "Leather"],
@@ -14,7 +14,7 @@ export const products: Product[] = [
   {
     id: "2",
     name: "Rose de Matin",
-    brand: "LK royal",
+    brand: "LK ROYAL",
     price: 95,
     description: "The freshness of early morning roses, kissed by dew and a hint of white musk.",
     notes: ["Damask Rose", "White Musk", "Peony", "Litchi"],
@@ -24,7 +24,7 @@ export const products: Product[] = [
   {
     id: "3",
     name: "Silver Vetiver",
-    brand: "LK royal",
+    brand: "LK ROYAL",
     price: 110,
     description: "Sharp, clean, and masculine. A sophisticated take on earthy vetiver with a metallic edge.",
     notes: ["Vetiver", "Grapefruit", "Cedarwood", "Amber"],
@@ -34,7 +34,7 @@ export const products: Product[] = [
   {
     id: "4",
     name: "Amber Bloom",
-    brand: "LK royal",
+    brand: "LK ROYAL",
     price: 105,
     description: "A warm embrace of golden amber and white flowers, perfect for cozy evenings.",
     notes: ["Amber", "Jasmine", "Patchouli", "Bergamot"],
@@ -44,7 +44,7 @@ export const products: Product[] = [
   {
     id: "5",
     name: "Citrus Zenith",
-    brand: "LK royal",
+    brand: "LK ROYAL",
     price: 85,
     description: "An explosion of Mediterranean sunlight. Bright, zesty, and endlessly refreshing.",
     notes: ["Lemon", "Neroli", "Sea Salt", "Sage"],
@@ -54,7 +54,7 @@ export const products: Product[] = [
   {
     id: "6",
     name: "Midnight Smoke",
-    brand: "LK royal",
+    brand: "LK ROYAL",
     price: 130,
     description: "Intense and captivating. A smoky cocktail of tobacco, dark chocolate, and spice.",
     notes: ["Tobacco", "Dark Chocolate", "Incense", "Cardamom"],
@@ -64,7 +64,7 @@ export const products: Product[] = [
   {
     id: "7",
     name: "Royal Jasmine",
-    brand: "LK royal",
+    brand: "LK ROYAL",
     price: 150,
     description: "The crown jewel of our collection. Pure jasmine sambac blended with white tea.",
     notes: ["Jasmine", "White Tea", "Pear", "Musk"],
@@ -74,7 +74,7 @@ export const products: Product[] = [
   {
     id: "8",
     name: "Velvet Orchid",
-    brand: "LK royal",
+    brand: "LK ROYAL",
     price: 140,
     description: "A dark, sensual floral experience that commands attention.",
     notes: ["Orchid", "Blackberry", "Patchouli", "Honey"],
@@ -84,7 +84,7 @@ export const products: Product[] = [
   {
     id: "9",
     name: "Imperial Sandalwood",
-    brand: "LK royal",
+    brand: "LK ROYAL",
     price: 125,
     description: "Creamy Mysore sandalwood paired with spiced cardamom and cedar.",
     notes: ["Sandalwood", "Cardamom", "Cedar", "Iris"],
@@ -94,7 +94,7 @@ export const products: Product[] = [
   {
     id: "10",
     name: "Desert Rose Pure Oil",
-    brand: "LK royal",
+    brand: "LK ROYAL",
     price: 180,
     description: "Concentrated pure perfume oil. A single drop lasts for 24 hours.",
     notes: ["Rose", "Saffron", "Oud", "Amber"],

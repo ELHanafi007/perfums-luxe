@@ -5,6 +5,7 @@ import { ShoppingBag, Search, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import { useCart } from "@/context/CartContext";
 
 const navLinks = [
   { name: "Shop", href: "/" },
@@ -16,6 +17,7 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { totalItems, setIsCartOpen } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,7 +49,7 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="text-xl md:text-2xl font-serif tracking-[0.3em] font-medium uppercase">
-            LK royal
+            LK ROYAL
           </Link>
 
           {/* Nav Links - Desktop */}
@@ -68,12 +70,22 @@ export default function Navbar() {
             <button aria-label="Search" className="hover:text-gold transition-colors">
               <Search size={20} strokeWidth={1.5} />
             </button>
-            <Link href="#" className="relative group" aria-label="Cart">
+            <button 
+              onClick={() => setIsCartOpen(true)}
+              className="relative group" 
+              aria-label="Cart"
+            >
               <ShoppingBag size={20} strokeWidth={1.5} className="group-hover:text-gold transition-colors" />
-              <span className="absolute -top-1.5 -right-1.5 bg-gold text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
-                0
-              </span>
-            </Link>
+              {totalItems > 0 && (
+                <motion.span 
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  className="absolute -top-1.5 -right-1.5 bg-gold text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold"
+                >
+                  {totalItems}
+                </motion.span>
+              )}
+            </button>
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
           <div className="col-span-1 lg:col-span-1">
             <Link href="/" className="text-2xl font-serif tracking-[0.3em] uppercase mb-8 block">
-              LK royal
+              LK ROYAL
             </Link>
             <p className="text-luxury-gray max-w-sm leading-relaxed mb-8 font-light italic">
               Crafting olfactory experiences that transcend time. Our perfumes are curated for those who appreciate the finer things in life.

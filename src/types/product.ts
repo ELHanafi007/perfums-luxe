@@ -8,3 +8,7 @@ export interface Product {
   image: string;
   category: "For Him" | "For Her" | "Unisex" | "Signature" | "Limited Edition" | "Pure Oils";
 }
+
+export interface CartItem extends Product {
+  quantity: number;
+}

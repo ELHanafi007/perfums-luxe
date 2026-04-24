@@ -4,10 +4,11 @@ import { products } from "@/data/products";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, MessageCircle, Heart } from "lucide-react";
+import { ArrowLeft, MessageCircle, Heart, ShoppingBag } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
+import { useCart } from "@/context/CartContext";
 
 interface ProductPageProps {
   params: {
@@ -16,6 +17,7 @@ interface ProductPageProps {
 }
 
 export default function ProductPage({ params }: ProductPageProps) {
+  const { addToCart } = useCart();
   const product = products.find((p) => p.id === params.id);
 
   if (!product) {
@@ -90,21 +92,38 @@ export default function ProductPage({ params }: ProductPageProps) {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-6 mb-16">
+          <div className="flex flex-col gap-6 mb-16">
+            <div className="flex flex-col sm:flex-row gap-6">
+              <Button 
+                size="full" 
+                className="flex items-center justify-center gap-3 py-8"
+                onClick={() => addToCart(product)}
+              >
+                <ShoppingBag size={20} strokeWidth={1.5} />
+                Add to Bag
+              </Button>
+              <button className="w-full sm:w-20 h-20 border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all duration-300">
+                <Heart size={24} strokeWidth={1.5} />
+              </button>
+            </div>
+            
+            <div className="relative flex items-center py-5">
+              <div className="flex-grow border-t border-gray-100"></div>
+              <span className="flex-shrink mx-4 text-[10px] uppercase tracking-[0.3em] text-gray-300">Or</span>
+              <div className="flex-grow border-t border-gray-100"></div>
+            </div>
+
             <a 
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-grow"
+              className="w-full"
             >
-              <Button size="full" className="flex items-center justify-center gap-3">
+              <Button variant="outline" size="full" className="flex items-center justify-center gap-3 border-gray-200">
                 <MessageCircle size={18} strokeWidth={1.5} />
                 Order via WhatsApp
               </Button>
             </a>
-            <button className="w-full sm:w-16 h-16 border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all duration-300">
-              <Heart size={20} strokeWidth={1.5} />
-            </button>
           </div>
 
           <div className="border-t border-gray-100 pt-10">

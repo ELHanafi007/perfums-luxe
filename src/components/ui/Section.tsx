@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { ReactNode } from "react";
+import { ReactNode, forwardRef } from "react";
 
 interface SectionProps {
   children: ReactNode;
@@ -9,13 +9,13 @@ interface SectionProps {
   size?: "sm" | "md" | "lg" | "xl";
 }
 
-export function Section({
+export const Section = forwardRef<HTMLElement, SectionProps>(({
   children,
   className,
   containerClassName,
   id,
   size = "md",
-}: SectionProps) {
+}, ref) => {
   const paddings = {
     sm: "py-12 lg:py-16",
     md: "py-20 lg:py-24",
@@ -24,10 +24,12 @@ export function Section({
   };
 
   return (
-    <section id={id} className={cn(paddings[size], className)}>
+    <section id={id} ref={ref} className={cn(paddings[size], className)}>
       <div className={cn("max-w-7xl mx-auto px-6 lg:px-12", containerClassName)}>
         {children}
       </div>
     </section>
   );
-}
+});
+
+Section.displayName = "Section";
