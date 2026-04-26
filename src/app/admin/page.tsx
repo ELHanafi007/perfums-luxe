@@ -40,7 +40,8 @@ export default function AdminDashboard() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (passcodeInput === "lklk2026") {
+    const correctPasscode = process.env.NEXT_PUBLIC_ADMIN_PASSCODE || "lklk2026";
+    if (passcodeInput === correctPasscode) {
       setIsAuthenticated(true);
       setLoginError("");
     } else {
