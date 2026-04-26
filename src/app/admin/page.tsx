@@ -28,6 +28,13 @@ export default function AdminDashboard() {
   const [passcodeInput, setPasscodeInput] = useState("");
   const [loginError, setLoginError] = useState("");
 
+  // Fetch products from Supabase on component mount
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchProducts();
+    }
+  }, [isAuthenticated]);
+
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (passcodeInput === "lklk2026") {
@@ -63,11 +70,6 @@ export default function AdminDashboard() {
       </Section>
     );
   }
-
-  // Fetch products from Supabase on component mount
-  useEffect(() => {
-    fetchProducts();
-  }, []);
 
   const fetchProducts = async () => {
     try {
