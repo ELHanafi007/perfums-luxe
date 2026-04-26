@@ -118,13 +118,13 @@ export default function AdminDashboard() {
           const filePath = `product-images/${fileName}`;
 
           const { error: uploadError } = await supabase.storage
-            .from('products')
+            .from('Products')
             .upload(filePath, file);
 
           if (uploadError) throw uploadError;
 
           const { data: { publicUrl } } = supabase.storage
-            .from('products')
+            .from('Products')
             .getPublicUrl(filePath);
 
           return publicUrl;
