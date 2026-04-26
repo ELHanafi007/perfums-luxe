@@ -6,14 +6,12 @@ import { Section } from "./ui/Section";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
-const categories = ["All", "For Him", "For Her", "Unisex", "Signature", "Limited Edition"];
+const categories = ["For Her", "For Him"];
 
 export default function ProductGrid() {
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [activeCategory, setActiveCategory] = useState("For Her");
 
-  const filteredProducts = activeCategory === "All" 
-    ? products 
-    : products.filter(p => p.category === activeCategory);
+  const filteredProducts = products.filter(p => p.category === activeCategory);
 
   const container = {
     hidden: { opacity: 0 },

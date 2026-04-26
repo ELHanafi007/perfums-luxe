@@ -36,22 +36,51 @@ export default function ProductPage({ params }: ProductPageProps) {
       </Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
-        {/* Product Image */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          className="relative aspect-[4/5] overflow-hidden bg-luxury-cream shadow-2xl"
-        >
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill
-            className="object-cover transition-transform duration-1000 hover:scale-110"
-            priority
-          />
-          <div className="absolute inset-0 border-[1px] border-black/5 m-4 pointer-events-none" />
-        </motion.div>
+        {/* Product Images - 3 Photos Layout */}
+        <div className="space-y-6">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            className="relative aspect-[4/5] overflow-hidden bg-luxury-cream shadow-2xl"
+          >
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              className="object-cover transition-transform duration-1000 hover:scale-110"
+              priority
+            />
+          </motion.div>
+          <div className="grid grid-cols-2 gap-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="relative aspect-[4/5] overflow-hidden bg-luxury-cream shadow-xl"
+            >
+              <Image
+                src={product.images?.[1] || product.image}
+                alt={`${product.name} alternate view`}
+                fill
+                className="object-cover"
+              />
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative aspect-[4/5] overflow-hidden bg-luxury-cream shadow-xl"
+            >
+              <Image
+                src={product.images?.[2] || product.image}
+                alt={`${product.name} detail view`}
+                fill
+                className="object-cover"
+              />
+            </motion.div>
+          </div>
+        </div>
 
         {/* Product Info */}
         <motion.div 

@@ -9,6 +9,11 @@ export const products: Product[] = [
     description: "A rich, mysterious blend of rare oud and warm spices, evoking an evening in a desert palace.",
     notes: ["Oud", "Saffron", "Vanilla", "Leather"],
     image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80&w=800",
+    images: [
+      "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=800",
+      "https://images.unsplash.com/photo-1592914610354-fd354ea45e48?auto=format&fit=crop&q=80&w=800"
+    ],
     category: "Signature",
   },
   {

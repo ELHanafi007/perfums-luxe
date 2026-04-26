@@ -15,6 +15,24 @@ export default function CheckoutPage() {
 
   const handleOrder = (e: React.FormEvent) => {
     e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const firstName = formData.get("firstName");
+    const lastName = formData.get("lastName");
+    const address = formData.get("address");
+    const city = formData.get("city");
+    
+    const itemsList = cart.map(item => `- ${item.name} (${item.brand}) x${item.quantity}`).join("\n");
+    const message = encodeURIComponent(
+      `New Order from LK ROYAL\n\n` +
+      `Customer: ${firstName} ${lastName}\n` +
+      `Address: ${address}, ${city}\n\n` +
+      `Items:\n${itemsList}\n\n` +
+      `Total: $${totalPrice}.00`
+    );
+    
+    const whatsappNumber = "1234567890"; // Replace with real number
+    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
+    
     setIsOrdered(true);
     setTimeout(() => {
       clearCart();
@@ -71,28 +89,28 @@ export default function CheckoutPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-3">
                   <label className="text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400">First Name</label>
-                  <input required type="text" className="w-full bg-transparent border-b border-gray-100 py-3 focus:outline-none focus:border-gold transition-colors font-light italic" />
+                  <input required name="firstName" type="text" className="w-full bg-transparent border-b border-gray-100 py-3 focus:outline-none focus:border-gold transition-colors font-light italic" />
                 </div>
                 <div className="space-y-3">
                   <label className="text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400">Last Name</label>
-                  <input required type="text" className="w-full bg-transparent border-b border-gray-100 py-3 focus:outline-none focus:border-gold transition-colors font-light italic" />
+                  <input required name="lastName" type="text" className="w-full bg-transparent border-b border-gray-100 py-3 focus:outline-none focus:border-gold transition-colors font-light italic" />
                 </div>
               </div>
               
               <div className="space-y-3">
                 <label className="text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400">Email Address</label>
-                <input required type="email" className="w-full bg-transparent border-b border-gray-100 py-3 focus:outline-none focus:border-gold transition-colors font-light italic" />
+                <input required name="email" type="email" className="w-full bg-transparent border-b border-gray-100 py-3 focus:outline-none focus:border-gold transition-colors font-light italic" />
               </div>
 
               <div className="space-y-3">
                 <label className="text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400">Full Address</label>
-                <input required type="text" className="w-full bg-transparent border-b border-gray-100 py-3 focus:outline-none focus:border-gold transition-colors font-light italic" />
+                <input required name="address" type="text" className="w-full bg-transparent border-b border-gray-100 py-3 focus:outline-none focus:border-gold transition-colors font-light italic" />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="space-y-3">
                   <label className="text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400">City</label>
-                  <input required type="text" className="w-full bg-transparent border-b border-gray-100 py-3 focus:outline-none focus:border-gold transition-colors font-light italic" />
+                  <input required name="city" type="text" className="w-full bg-transparent border-b border-gray-100 py-3 focus:outline-none focus:border-gold transition-colors font-light italic" />
                 </div>
                 <div className="space-y-3">
                   <label className="text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400">Postal Code</label>
