@@ -20,6 +20,7 @@ export default function AdminDashboard() {
     price: 0,
     category: "For Her",
     image: "",
+    images: [],
     description: "",
     notes: []
   });
