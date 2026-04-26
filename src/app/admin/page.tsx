@@ -247,25 +247,24 @@ export default function AdminDashboard() {
         ))}
       </div>
 
-      {/* Modal for Add/Edit */}
       <AnimatePresence>
         {(isAdding || editingId) && (
-          <>
+          <div className="fixed inset-0 z-[200] flex items-start lg:items-center justify-center p-4 lg:p-0">
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => { setIsAdding(false); setEditingId(null); }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[200]"
+              className="absolute inset-0 bg-black/80 backdrop-blur-md"
             />
             <motion.div 
               initial={{ opacity: 0, y: 50, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 50, scale: 0.95 }}
-              className="fixed top-[5%] lg:top-1/2 left-1/2 -translate-x-1/2 lg:-translate-y-1/2 w-[92%] max-w-2xl max-h-[90vh] overflow-y-auto bg-white z-[210] p-8 lg:p-12 shadow-2xl"
+              className="relative w-full max-w-2xl max-h-[85vh] lg:max-h-[90vh] overflow-y-auto bg-white p-6 lg:p-12 shadow-2xl mt-12 lg:mt-0"
             >
               <div className="flex justify-between items-center mb-8 lg:mb-10">
-                <h2 className="text-xl lg:text-2xl font-serif uppercase tracking-widest">
+                <h2 className="text-lg lg:text-2xl font-serif uppercase tracking-widest">
                   {editingId ? "Edit Essence" : "Add New Essence"}
                 </h2>
                 <button onClick={() => { setIsAdding(false); setEditingId(null); }}>
@@ -346,7 +345,7 @@ export default function AdminDashboard() {
                 {uploading ? "Uploading..." : (editingId ? "Save Changes" : "Add Essence")}
               </Button>
             </motion.div>
-          </>
+          </div>
         )}
       </AnimatePresence>
     </Section>
