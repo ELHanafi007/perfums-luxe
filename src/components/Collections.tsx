@@ -8,22 +8,22 @@ import { useRef } from "react";
 
 const collections = [
   {
-    name: "Signature",
-    description: "Our timeless masterpieces",
-    image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80&w=800",
-    href: "/collections/signature"
+    name: "Les Extraits",
+    description: "Intense and long-lasting",
+    image: "/images/les_extraits.webp",
+    href: "/collections/extraits"
   },
   {
     name: "Pure Oils",
-    description: "Concentrated luxury",
-    image: "https://images.unsplash.com/photo-1619994403073-2cec844b8e63?auto=format&fit=crop&q=80&w=800",
+    description: "Concentrated attars and drops",
+    image: "/images/pure_oils.jpg",
     href: "/collections/pure-oils"
   },
   {
-    name: "Limited Edition",
-    description: "Rare and exclusive",
-    image: "https://images.unsplash.com/photo-1563170351-be82bc888bb4?auto=format&fit=crop&q=80&w=800",
-    href: "/collections/limited-edition"
+    name: "Private Blend",
+    description: "Exclusive & rare ingredients",
+    image: "/images/private_blend.jpg",
+    href: "/collections/private-blend"
   }
 ];
 

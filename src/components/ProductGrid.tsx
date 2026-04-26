@@ -1,15 +1,27 @@
 "use client";
 
-import { products } from "@/data/products";
 import ProductCard from "./ProductCard";
 import { Section } from "./ui/Section";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "@/lib/supabase";
+import { Product } from "@/types/product";
 
 const categories = ["For Her", "For Him"];
 
 export default function ProductGrid() {
   const [activeCategory, setActiveCategory] = useState("For Her");
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data, error } = await supabase.from('products').select('*');
+      if (!error && data) {
+        setProducts(data);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   const filteredProducts = products.filter(p => p.category === activeCategory);
 
@@ -70,7 +82,7 @@ export default function ProductGrid() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-16"
+        className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 sm:gap-x-8 gap-y-12 sm:gap-y-16"
       >
         <AnimatePresence mode="popLayout">
           {filteredProducts.map((product) => (

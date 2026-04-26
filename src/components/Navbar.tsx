@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ShoppingBag, Search, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -50,8 +51,10 @@ export default function Navbar() {
           </button>
 
           {/* Logo */}
-          <Link href="/" className="text-xl md:text-2xl font-serif tracking-[0.3em] font-medium uppercase">
-            LK ROYAL
+          <Link href="/" className="flex items-center">
+            <div className="relative w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden border border-gold/30">
+              <Image src="/images/logo.jpeg" alt="LK ROYAL Logo" fill className="object-cover" />
+            </div>
           </Link>
 
           {/* Nav Links - Desktop */}

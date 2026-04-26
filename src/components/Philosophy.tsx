@@ -16,16 +16,14 @@ export default function Philosophy() {
 
   return (
     <Section className="bg-black text-white relative overflow-hidden" size="xl">
-      {/* Abstract Background Elements */}
+      {/* Background Image */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <motion.div 
-          style={{ rotate, scale }}
-          className="absolute -top-[20%] -right-[10%] w-[100%] aspect-square border border-gold/10 rounded-full" 
+        <img
+          src="/images/philosophy_book.jpeg"
+          alt="Philosophy Background"
+          className="w-full h-full object-cover opacity-30 grayscale-[0.3]"
         />
-        <motion.div 
-          style={{ rotate: useTransform(scrollYProgress, [0, 1], [0, -40]), scale }}
-          className="absolute -bottom-[20%] -left-[10%] w-[80%] aspect-square border border-gold/5 rounded-full" 
-        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/50" />
       </div>
 
       <motion.div 

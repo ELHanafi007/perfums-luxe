@@ -1,6 +1,5 @@
 "use client";
 
-import { products } from "@/data/products";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +8,9 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { useCart } from "@/context/CartContext";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+import { Product } from "@/types/product";
 
 interface ProductPageProps {
   params: {
@@ -18,10 +20,31 @@ interface ProductPageProps {
 
 export default function ProductPage({ params }: ProductPageProps) {
   const { addToCart } = useCart();
-  const product = products.find((p) => p.id === params.id);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .eq('id', params.id)
+        .single();
+        
+      if (!error && data) {
+        setProduct(data);
+      }
+      setLoading(false);
+    };
+    fetchProduct();
+  }, [params.id]);
+
+  if (loading) {
+    return <Section size="xl" className="pt-40"><p>Loading...</p></Section>;
+  }
 
   if (!product) {
-    notFound();
+    return <Section size="xl" className="pt-40"><p>Product not found.</p></Section>;
   }
 
   const whatsappNumber = "1234567890"; // Replace with real number

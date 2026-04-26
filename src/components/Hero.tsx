@@ -28,10 +28,10 @@ export default function Hero() {
         className="absolute inset-0 z-0"
       >
         <Image
-          src="https://images.unsplash.com/photo-1615485244919-4f84d7240cfa?auto=format&fit=crop&q=80&w=2000"
+          src="/images/gold_bottle.jpeg"
           alt="Luxury Background"
           fill
-          className="object-cover opacity-60 grayscale-[0.5]"
+          className="object-cover opacity-60 grayscale-[0.2]"
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-black/80" />

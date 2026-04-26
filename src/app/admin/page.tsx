@@ -1,15 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { products as initialProducts } from "@/data/products";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { Trash2, Edit, Plus, X, Save } from "lucide-react";
 import { Product } from "@/types/product";
 import { motion, AnimatePresence } from "framer-motion";
+import { supabase } from "@/lib/supabase";
 
 export default function AdminDashboard() {
-  const [products, setProducts] = useState<Product[]>(initialProducts);
+  const [products, setProducts] = useState<Product[]>([]);
   const [isAdding, setIsAdding] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   
@@ -23,9 +24,33 @@ export default function AdminDashboard() {
     notes: []
   });
 
-  const handleDelete = (id: string) => {
+  // Fetch products from Supabase on component mount
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const { data, error } = await supabase.from("products").select("*");
+      if (error) throw error;
+      setProducts(data || []);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      // Fallback to initialProducts if Supabase fails (e.g. not configured yet)
+      setProducts(initialProducts);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
     if (confirm("Are you sure you want to delete this product?")) {
-      setProducts(products.filter(p => p.id !== id));
+      try {
+        const { error } = await supabase.from("products").delete().eq("id", id);
+        if (error) throw error;
+        setProducts(products.filter(p => p.id !== id));
+      } catch (error) {
+        console.error("Error deleting product:", error);
+        alert("Failed to delete product. Is Supabase configured?");
+      }
     }
   };
 
@@ -34,19 +59,41 @@ export default function AdminDashboard() {
     setFormData(product);
   };
 
-  const handleSave = () => {
-    if (editingId) {
-      setProducts(products.map(p => p.id === editingId ? { ...p, ...formData } as Product : p));
-      setEditingId(null);
-    } else {
-      const newProduct = {
-        ...formData,
-        id: Math.random().toString(36).substr(2, 9),
-      } as Product;
-      setProducts([...products, newProduct]);
-      setIsAdding(false);
+  const handleSave = async () => {
+    try {
+      if (editingId) {
+        // Update existing product
+        const { error } = await supabase
+          .from("products")
+          .update(formData)
+          .eq("id", editingId);
+        
+        if (error) throw error;
+        setProducts(products.map(p => p.id === editingId ? { ...p, ...formData } as Product : p));
+        setEditingId(null);
+      } else {
+        // Add new product
+        const newProduct = {
+          ...formData,
+          // If your Supabase table auto-generates IDs, omit this. Assuming UUID here or let DB handle it.
+        };
+        
+        const { data, error } = await supabase
+          .from("products")
+          .insert([newProduct])
+          .select();
+          
+        if (error) throw error;
+        if (data && data.length > 0) {
+          setProducts([...products, data[0] as Product]);
+        }
+        setIsAdding(false);
+      }
+      setFormData({ name: "", brand: "LK ROYAL", price: 0, category: "For Her", image: "", description: "", notes: [] });
+    } catch (error) {
+      console.error("Error saving product:", error);
+      alert("Failed to save product. Check Supabase connection.");
     }
-    setFormData({ name: "", brand: "LK ROYAL", price: 0, category: "For Her", image: "", description: "", notes: [] });
   };
 
   return (
