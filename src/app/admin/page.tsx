@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { products as initialProducts } from "@/data/products";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
-import { Trash2, Edit, Plus, X, Save, Upload } from "lucide-react";
+import { Trash2, Edit, Plus, X, Save, Upload, Image as ImageIcon } from "lucide-react";
 import { Product } from "@/types/product";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/lib/supabase";
@@ -25,7 +25,7 @@ export default function AdminDashboard() {
   });
 
   const [uploading, setUploading] = useState(false);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passcodeInput, setPasscodeInput] = useState("");
@@ -107,27 +107,50 @@ export default function AdminDashboard() {
   const handleSave = async () => {
     try {
       setUploading(true);
-      let imageUrl = formData.image;
+      let mainImageUrl = formData.image;
+      let galleryUrls = formData.images || [];
 
-      if (selectedFile) {
-        const fileExt = selectedFile.name.split('.').pop();
-        const fileName = `${Math.random()}.${fileExt}`;
-        const filePath = `product-images/${fileName}`;
+      // 1. Upload new files if any
+      if (selectedFiles.length > 0) {
+        const uploadPromises = selectedFiles.map(async (file) => {
+          const fileExt = file.name.split('.').pop();
+          const fileName = `${Math.random()}.${fileExt}`;
+          const filePath = `product-images/${fileName}`;
 
-        const { error: uploadError } = await supabase.storage
-          .from('products')
-          .upload(filePath, selectedFile);
+          const { error: uploadError } = await supabase.storage
+            .from('products')
+            .upload(filePath, file);
 
-        if (uploadError) throw uploadError;
+          if (uploadError) throw uploadError;
 
-        const { data: { publicUrl } } = supabase.storage
-          .from('products')
-          .getPublicUrl(filePath);
+          const { data: { publicUrl } } = supabase.storage
+            .from('products')
+            .getPublicUrl(filePath);
 
-        imageUrl = publicUrl;
+          return publicUrl;
+        });
+
+        const newUrls = await Promise.all(uploadPromises);
+        
+        // Use the first new image as main if there isn't one already
+        if (!mainImageUrl && newUrls.length > 0) {
+          mainImageUrl = newUrls[0];
+          galleryUrls = [...galleryUrls, ...newUrls];
+        } else {
+          galleryUrls = [...galleryUrls, ...newUrls];
+        }
       }
 
-      const productData = { ...formData, image: imageUrl };
+      // Ensure we have a main image if gallery exists
+      if (!mainImageUrl && galleryUrls.length > 0) {
+        mainImageUrl = galleryUrls[0];
+      }
+
+      const productData = { 
+        ...formData, 
+        image: mainImageUrl,
+        images: galleryUrls 
+      };
 
       if (editingId) {
         const { error } = await supabase
@@ -151,10 +174,10 @@ export default function AdminDashboard() {
         setIsAdding(false);
       }
       setFormData({ name: "", brand: "LK ROYAL", price: 0, category: "For Her", image: "", description: "", notes: [] });
-      setSelectedFile(null);
-    } catch (error) {
+      setSelectedFiles([]);
+    } catch (error: any) {
       console.error("Error saving product:", error);
-      alert("Failed to save product. Check Supabase connection and Storage bucket.");
+      alert(`Error: ${error.message || "Failed to save product"}. Ensure your 'products' bucket exists and is PUBLIC.`);
     } finally {
       setUploading(false);
     }
@@ -302,23 +325,52 @@ export default function AdminDashboard() {
                     <option value="For Him">For Him</option>
                   </select>
                 </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Image</label>
-                  <div className="flex items-center gap-4">
-                    {formData.image && !selectedFile && (
-                      <div className="w-10 h-12 bg-luxury-cream shrink-0 overflow-hidden">
-                        <img src={formData.image} className="w-full h-full object-cover" alt="Current" />
+                <div className="space-y-4 md:col-span-2">
+                  <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Essence Gallery</label>
+                  
+                  <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
+                    {/* Existing Images */}
+                    {(formData.images || []).map((url, idx) => (
+                      <div key={idx} className="relative aspect-[3/4] bg-luxury-cream group">
+                        <img src={url} alt="Gallery" className="w-full h-full object-cover" />
+                        <button 
+                          onClick={() => setFormData({ ...formData, images: formData.images?.filter((_, i) => i !== idx) })}
+                          className="absolute top-1 right-1 p-1 bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                          <X size={12} />
+                        </button>
+                        {url === formData.image && (
+                          <div className="absolute bottom-0 inset-x-0 bg-gold text-[8px] text-white text-center py-1 uppercase tracking-widest font-bold">Main</div>
+                        )}
                       </div>
-                    )}
-                    <label className="flex-grow border-b border-gray-100 py-2 focus-within:border-gold cursor-pointer flex items-center gap-2">
-                      <Upload size={14} className="text-gray-400" />
-                      <span className="text-[10px] sm:text-xs font-light italic text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap max-w-[150px]">
-                        {selectedFile ? selectedFile.name : "Upload Photo"}
+                    ))}
+                    
+                    {/* Selected File Previews */}
+                    {selectedFiles.map((file, idx) => (
+                      <div key={`new-${idx}`} className="relative aspect-[3/4] bg-luxury-cream border-2 border-dashed border-gold/30">
+                        <div className="w-full h-full flex items-center justify-center text-[8px] text-gold uppercase tracking-tighter text-center px-1">
+                          Ready: {file.name}
+                        </div>
+                        <button 
+                          onClick={() => setSelectedFiles(selectedFiles.filter((_, i) => i !== idx))}
+                          className="absolute top-1 right-1 p-1 bg-black/50 text-white"
+                        >
+                          <X size={12} />
+                        </button>
+                      </div>
+                    ))}
+
+                    {/* Upload Button */}
+                    <label className="aspect-[3/4] border-2 border-dashed border-gray-100 hover:border-gold transition-colors cursor-pointer flex flex-col items-center justify-center gap-2 group">
+                      <Plus size={20} className="text-gray-300 group-hover:text-gold" />
+                      <span className="text-[8px] uppercase tracking-widest text-gray-400 group-hover:text-gold font-bold text-center px-2">
+                        Add Photo
                       </span>
                       <input 
                         type="file" 
                         accept="image/*"
-                        onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
+                        multiple
+                        onChange={(e) => setSelectedFiles([...selectedFiles, ...Array.from(e.target.files || [])])}
                         className="hidden" 
                       />
                     </label>
