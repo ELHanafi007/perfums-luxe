@@ -24,6 +24,46 @@ export default function AdminDashboard() {
     notes: []
   });
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [passcodeInput, setPasscodeInput] = useState("");
+  const [loginError, setLoginError] = useState("");
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (passcodeInput === "lklk2026") {
+      setIsAuthenticated(true);
+      setLoginError("");
+    } else {
+      setLoginError("Incorrect passcode");
+    }
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <Section size="xl" className="pt-40 min-h-screen flex items-center justify-center">
+        <div className="max-w-md w-full bg-white p-12 shadow-2xl text-center">
+          <h2 className="text-2xl font-serif uppercase tracking-widest mb-8">Admin Access</h2>
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div className="space-y-2 text-left">
+              <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400">Passcode</label>
+              <input 
+                type="password" 
+                value={passcodeInput}
+                onChange={(e) => setPasscodeInput(e.target.value)}
+                className="w-full border-b border-gray-100 py-2 focus:outline-none focus:border-gold font-light tracking-widest text-center"
+                autoFocus
+              />
+              {loginError && <p className="text-red-500 text-[10px] uppercase tracking-widest mt-2">{loginError}</p>}
+            </div>
+            <Button type="submit" size="full" className="mt-4">
+              Enter Atelier
+            </Button>
+          </form>
+        </div>
+      </Section>
+    );
+  }
+
   // Fetch products from Supabase on component mount
   useEffect(() => {
     fetchProducts();
