@@ -1,22 +1,12 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { Section } from "./ui/Section";
 
 export default function Experience() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const scale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1]);
-  const y = useTransform(scrollYProgress, [0, 1], [-100, 100]);
-
   return (
-    <Section ref={containerRef} className="bg-luxury-cream/30 overflow-hidden" size="xl">
+    <Section className="bg-luxury-cream/30 overflow-hidden" size="xl">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
         {/* Left Text */}
         <div className="lg:col-span-5 order-2 lg:order-1">
@@ -53,41 +43,14 @@ export default function Experience() {
           </motion.div>
         </div>
 
-        {/* Right Parallax Images */}
+        {/* Right Image */}
         <div className="lg:col-span-7 order-1 lg:order-2">
-          <div className="relative h-[600px] md:h-[800px] w-full">
-            <motion.div 
-              style={{ scale }}
-              className="absolute top-0 right-0 w-[85%] h-[90%] overflow-hidden shadow-[30px_30px_60px_rgba(0,0,0,0.1)]"
-            >
-              <Image
-                src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=1200"
-                alt="Perfume Bottle"
-                fill
-                className="object-cover"
-              />
-            </motion.div>
-            
-            <motion.div 
-              style={{ y }}
-              className="absolute bottom-0 left-0 w-[50%] h-[60%] overflow-hidden shadow-2xl border-[15px] border-white z-10"
-            >
-              <Image
-                src="/images/curated.png"
-                alt="Curated Collection"
-                fill
-                className="object-cover"
-              />
-            </motion.div>
-
-            {/* Floating Gold Element */}
-            <motion.div
-              animate={{ 
-                y: [0, -20, 0],
-                rotate: [0, 5, 0]
-              }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-1/2 left-1/2 w-32 h-32 border border-gold/20 -z-10"
+          <div className="relative h-[500px] md:h-[700px] w-full overflow-hidden shadow-[30px_30px_60px_rgba(0,0,0,0.1)]">
+            <Image
+              src="/images/curated.png"
+              alt="Curated Collection"
+              fill
+              className="object-cover"
             />
           </div>
         </div>
