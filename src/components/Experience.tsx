@@ -73,8 +73,8 @@ export default function Experience() {
               className="absolute bottom-0 left-0 w-[50%] h-[60%] overflow-hidden shadow-2xl border-[15px] border-white z-10"
             >
               <Image
-                src="https://images.unsplash.com/photo-1616984202997-07440082987a?auto=format&fit=crop&q=80&w=800"
-                alt="Ingredients"
+                src="/images/curated.png"
+                alt="Curated Collection"
                 fill
                 className="object-cover"
               />

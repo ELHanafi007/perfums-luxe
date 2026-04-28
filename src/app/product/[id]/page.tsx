@@ -47,7 +47,7 @@ export default function ProductPage({ params }: ProductPageProps) {
     return <Section size="xl" className="pt-40"><p>Product not found.</p></Section>;
   }
 
-  const whatsappNumber = "1234567890"; // Replace with real number
+  const whatsappNumber = "14044319074";
   const message = encodeURIComponent(`Hello, I'm interested in ordering ${product.name} (${product.brand}) for $${product.price}.`);
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
 

@@ -30,7 +30,7 @@ export default function CheckoutPage() {
       `Total: $${totalPrice}.00`
     );
     
-    const whatsappNumber = "1234567890"; // Replace with real number
+    const whatsappNumber = "14044319074";
     window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
     
     setIsOrdered(true);
