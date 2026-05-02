@@ -7,7 +7,7 @@ export interface Product {
   notes: string[];
   image: string;
   images?: string[];
-  category: "For Him" | "For Her" | "Unisex" | "Signature" | "Limited Edition" | "Pure Oils";
+  category: "For Him" | "For Her" | "Unisex" | "Signature" | "Limited Edition" | "Pure Oils" | "Promo Packs";
 }
 
 export interface CartItem extends Product {

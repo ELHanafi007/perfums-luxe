@@ -8,22 +8,22 @@ import { useRef } from "react";
 
 const collections = [
   {
-    name: "Les Extraits",
-    description: "Intense and long-lasting",
-    image: "/images/les_extraits.webp",
-    href: "/collections/extraits"
+    name: "For Him",
+    description: "Bold & Sophisticated Essences",
+    image: "/images/for_him.jpg",
+    href: "/collections/for-him"
   },
   {
-    name: "Pure Oils",
-    description: "Concentrated attars and drops",
-    image: "/images/pure_oils.jpg",
-    href: "/collections/pure-oils"
+    name: "For Her",
+    description: "Elegant & Romantic Aromas",
+    image: "/images/promo_pack.jpg",
+    href: "/collections/for-her"
   },
   {
-    name: "Private Blend",
-    description: "Exclusive & rare ingredients",
-    image: "/images/private_blend.jpg",
-    href: "/collections/private-blend"
+    name: "Promo Packs",
+    description: "Exclusive Value Bundles",
+    image: "/images/for_him.jpg",
+    href: "/collections/promo-packs"
   }
 ];
 

@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { Product } from "@/types/product";
 
-const categories = ["For Her", "For Him"];
+const categories = ["For Her", "For Him", "Promo Packs"];
 
 export default function ProductGrid() {
   const [activeCategory, setActiveCategory] = useState("For Her");

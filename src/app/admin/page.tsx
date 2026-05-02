@@ -325,6 +325,7 @@ export default function AdminDashboard() {
                   >
                     <option value="For Her">For Her</option>
                     <option value="For Him">For Him</option>
+                    <option value="Promo Packs">Promo Packs</option>
                   </select>
                 </div>
                 <div className="space-y-4 md:col-span-2">
