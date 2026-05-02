@@ -48,7 +48,7 @@ export default function ProductPage({ params }: ProductPageProps) {
   }
 
   const whatsappNumber = "14044319074";
-  const message = encodeURIComponent(`Hello, I'm interested in ordering ${product.name} (${product.brand}) for $${product.price}.`);
+  const message = encodeURIComponent(`Hello, I'm interested in ordering ${product.name} (${product.brand}) for ${product.price}.00 MAD.`);
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
 
   return (
@@ -120,7 +120,7 @@ export default function ProductPage({ params }: ProductPageProps) {
               {product.name}
             </h1>
             <p className="text-3xl font-light text-luxury-black">
-              ${product.price}.00
+              {product.price}.00 MAD
             </p>
           </div>
 
@@ -182,7 +182,7 @@ export default function ProductPage({ params }: ProductPageProps) {
             <ul className="space-y-4 text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold">
               <li className="flex items-center gap-3">
                 <div className="w-1.5 h-1.5 bg-gold rounded-full" />
-                Complimentary shipping on orders over $200
+                Complimentary shipping on orders over 200 MAD
               </li>
               <li className="flex items-center gap-3">
                 <div className="w-1.5 h-1.5 bg-gold rounded-full" />

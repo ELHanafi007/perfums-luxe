@@ -27,7 +27,7 @@ export default function CheckoutPage() {
       `Customer: ${firstName} ${lastName}\n` +
       `Address: ${address}, ${city}\n\n` +
       `Items:\n${itemsList}\n\n` +
-      `Total: $${totalPrice}.00`
+      `Total: ${totalPrice}.00 MAD`
     );
     
     const whatsappNumber = "14044319074";
@@ -141,10 +141,10 @@ export default function CheckoutPage() {
                   </div>
                   <div className="flex-grow flex flex-col justify-center">
                     <h4 className="text-sm font-medium uppercase tracking-widest mb-1">{item.name}</h4>
-                    <p className="text-[10px] text-gray-400 uppercase tracking-widest">{item.quantity} × ${item.price}.00</p>
+                    <p className="text-[10px] text-gray-400 uppercase tracking-widest">{item.quantity} × {item.price}.00 MAD</p>
                   </div>
                   <div className="flex items-center text-sm font-light">
-                    ${item.price * item.quantity}.00
+                    {item.price * item.quantity}.00 MAD
                   </div>
                 </div>
               ))}
@@ -153,7 +153,7 @@ export default function CheckoutPage() {
             <div className="space-y-4 border-t border-gray-100 pt-8">
               <div className="flex justify-between text-[11px] uppercase tracking-widest text-gray-400 font-bold">
                 <span>Subtotal</span>
-                <span>${totalPrice}.00</span>
+                <span>{totalPrice}.00 MAD</span>
               </div>
               <div className="flex justify-between text-[11px] uppercase tracking-widest text-gray-400 font-bold">
                 <span>Shipping</span>
@@ -161,7 +161,7 @@ export default function CheckoutPage() {
               </div>
               <div className="flex justify-between text-2xl font-serif pt-4">
                 <span>Total</span>
-                <span>${totalPrice}.00</span>
+                <span>{totalPrice}.00 MAD</span>
               </div>
             </div>
           </div>

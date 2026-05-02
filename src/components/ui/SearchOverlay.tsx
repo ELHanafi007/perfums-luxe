@@ -106,7 +106,7 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                         <div className="flex flex-col justify-center">
                           <span className="text-[9px] uppercase tracking-[0.3em] text-gold font-bold mb-2">{product.brand}</span>
                           <h3 className="text-2xl font-serif mb-2 group-hover:text-gold transition-colors">{product.name}</h3>
-                          <p className="text-sm font-light text-luxury-gray mb-4">${product.price}.00</p>
+                          <p className="text-sm font-light text-luxury-gray mb-4">{product.price}.00 MAD</p>
                           <div className="flex items-center gap-2 text-[9px] uppercase tracking-widest font-bold group-hover:gap-4 transition-all">
                             View Details <ArrowRight size={12} />
                           </div>

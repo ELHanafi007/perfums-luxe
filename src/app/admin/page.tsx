@@ -220,7 +220,7 @@ export default function AdminDashboard() {
                   </div>
                 </td>
                 <td className="py-6 px-4 text-sm font-light uppercase tracking-widest">{product.category}</td>
-                <td className="py-6 px-4 text-sm font-light">${product.price}.00</td>
+                <td className="py-6 px-4 text-sm font-light">{product.price}.00 MAD</td>
                 <td className="py-6 px-4 text-right">
                   <div className="flex justify-end gap-4">
                     <button onClick={() => handleEdit(product)} className="p-2 text-gray-400 hover:text-black transition-colors">
@@ -250,7 +250,7 @@ export default function AdminDashboard() {
                 <h3 className="font-serif text-xl mb-2">{product.name}</h3>
                 <div className="flex justify-between items-end">
                   <span className="text-[10px] uppercase tracking-widest font-light text-gray-400">{product.category}</span>
-                  <span className="text-lg font-light">${product.price}.00</span>
+                  <span className="text-lg font-light">{product.price}.00 MAD</span>
                 </div>
               </div>
             </div>

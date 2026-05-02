@@ -80,7 +80,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className="flex items-center justify-center gap-4">
           <div className="h-px w-4 bg-gray-200" />
           <p className="text-sm font-light tracking-[0.2em] text-luxury-black/60">
-            ${product.price}.00
+            {product.price}.00 MAD
           </p>
           <div className="h-px w-4 bg-gray-200" />
         </div>

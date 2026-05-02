@@ -90,7 +90,7 @@ export default function CartDrawer() {
                           </button>
                         </div>
                         <h3 className="text-lg font-serif mb-2">{item.name}</h3>
-                        <p className="text-sm font-light text-luxury-gray">${item.price}.00</p>
+                        <p className="text-sm font-light text-luxury-gray">{item.price}.00 MAD</p>
                       </div>
                       
                       <div className="flex items-center gap-4">
@@ -121,7 +121,7 @@ export default function CartDrawer() {
               <div className="p-8 border-t border-gray-100 bg-luxury-cream/20">
                 <div className="flex justify-between items-center mb-8">
                   <span className="text-[11px] uppercase tracking-[0.3em] font-bold text-gray-400">Total Price</span>
-                  <span className="text-2xl font-serif">${totalPrice}.00</span>
+                  <span className="text-2xl font-serif">{totalPrice}.00 MAD</span>
                 </div>
                 <div className="space-y-4">
                   <Link href="/checkout" onClick={() => setIsCartOpen(false)}>
